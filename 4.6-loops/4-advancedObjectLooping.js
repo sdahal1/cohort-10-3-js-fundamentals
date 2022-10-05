@@ -14,6 +14,7 @@ const tournament2 = {
 
 
 
+
 // calculateTotalPoints
 //The calculateTotalPoints function will take in the tournament and return a total number of points scored from all teams in all games
 
