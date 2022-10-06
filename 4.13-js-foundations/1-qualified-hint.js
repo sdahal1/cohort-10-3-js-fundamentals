@@ -93,7 +93,7 @@ let teams = [
     championships: 0
   }
 ]
-console.log(findTeamByCityAndPlayer(teams, "New York", "Kyrie Irving"))
+// console.log(findTeamByCityAndPlayer(teams, "New York", "Kyrie Irving"))
 
 
 
@@ -189,13 +189,25 @@ let cities_usa = {
 }
 
 
-console.log(addCityToCities(newTeam, cities_usa))
+// console.log(addCityToCities(newTeam, cities_usa))
 
 
 
 function calculateTotalChampionships(cities) {
-	
+
+  let total = 0;
+	//loop through cities-> this is an object so-> "foreign object" -> for-in loop on object
+  for(let city in cities){
+    let currentCity = cities[city];
+    // console.log(cities[city].numberOfChampionships)
+    total += currentCity.numberOfChampionships;
+
+  }
+
+  return total
 }
+
+// console.log(calculateTotalChampionships(cities_usa))
 
 
 
@@ -229,7 +241,18 @@ let cities_usa = {
 
 */
 function printInfo(cities) {
-	
+	//`${cityNameHere} has ${numberChampionshipsForCityHere} championships and the following team(s): ${listOfTeamsForCityHre}. \n`
+
+  //have  a string to put all the sentences into
+  let result = "";
+
+  for(let city in cities){
+    let currentCityData = cities[city]
+    let currentSentence = `${city} has ${currentCityData.numberOfChampionships} championships and the following team${currentCityData.teams.length>1 ? "s":""}: ${currentCityData.teams.join(", ")}. \n`
+    // console.log(currentSentence)
+    result+=currentSentence;
+  }
+  return result;
 }
 
 

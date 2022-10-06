@@ -1,0 +1,21 @@
+{
+  "name": "3.7-3.9-packaged-and-assessment-hint",
+  "version": "1.0.0",
+  "description": "Lecture showing some cool packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lookSee": "ls",
+    "dev": "node main.js"
+  },
+  "keywords": [],
+  "author": "Rob",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0"
+  }
+}

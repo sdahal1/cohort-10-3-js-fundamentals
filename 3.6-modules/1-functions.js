@@ -9,4 +9,8 @@ function findPlantById(plants, id) {
     return result;
 }
 
-module.exports = findPlantById;
+function sayHello(){
+    console.log("hello!")
+}
+
+module.exports = {sayHello, findPlantById};
