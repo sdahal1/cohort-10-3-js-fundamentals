@@ -29,4 +29,8 @@ let robsPlaylist = [
 //     }
 // }
 
+//Array-> you can use for-of and for -in
+    //for-in -> you will get index numbers
+    //for-of --> you will only get elements
 
+//objects-> only for-in loops
