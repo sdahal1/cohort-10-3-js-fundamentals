@@ -246,9 +246,14 @@ function printInfo(cities) {
   //have  a string to put all the sentences into
   let result = "";
 
+  //loop through the cities object
   for(let city in cities){
+    //store the current city in a variable
     let currentCityData = cities[city]
+    // console.log("current city data is this--->", currentCityData)
+    //build a sentence for the city in this format: `${cityNameHere} has ${numberChampionshipsForCityHere} championships and the following team(s): ${listOfTeamsForCityHre}. \n`
     let currentSentence = `${city} has ${currentCityData.numberOfChampionships} championships and the following team${currentCityData.teams.length>1 ? "s":""}: ${currentCityData.teams.join(", ")}. \n`
+
     // console.log(currentSentence)
     result+=currentSentence;
   }
@@ -256,4 +261,4 @@ function printInfo(cities) {
 }
 
 
-// console.log(printInfo(cities_usa))
+console.log(printInfo(cities_usa))
