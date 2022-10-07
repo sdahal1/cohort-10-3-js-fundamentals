@@ -71,8 +71,10 @@ let freeStyleArtists = [
 let totalFire = 0;
 
 // for(let i = 0; i<freeStyleArtists.length; i++){
-//   totalFire += freeStyleArtists[i].fireLevel;
+//   let rapperObj = freeStyleArtists[i]
+//   totalFire += rapperObj.fireLevel;
 // }
+
 freeStyleArtists.forEach((rapperObj, idx)=>{
   totalFire += rapperObj.fireLevel
 })
