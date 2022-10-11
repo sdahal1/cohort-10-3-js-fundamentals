@@ -73,10 +73,7 @@ const courses = [
         category: "Finance",
         instructorId: 1,
         roster: [
-            {
-                studentId: 1,
-                onPace: true
-            },
+         
             {
                 studentId: 2,
                 onPace: true

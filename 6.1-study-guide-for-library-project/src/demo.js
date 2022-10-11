@@ -1,42 +1,39 @@
 //import data
-const courses = require("../data/courses")
-const instructors = require("../data/instructors")
-const students = require("../data/students")
-
-
+const courses = require("../data/courses");
+const instructors = require("../data/instructors");
+const students = require("../data/students");
 
 //1. Get Total courses count
-function getTotalCoursesCount(courses=[]) {
-    return courses.length
+function getTotalCoursesCount(courses = []) {
+    return courses.length;
 }
 
 // console.log(getTotalCoursesCount())
 
 //2. Get Total students count
-function getTotalStudentsCount(students=[]) {
-    return students.length
+function getTotalStudentsCount(students = []) {
+    return students.length;
 }
 
 //3. Find instructor by Id-> given array of instructors and an id, find the instructor object that matches the given id
 function findInstructorById(instructors, id) {
-    let result = instructors.find((instructorObj)=>{
+    let result = instructors.find((instructorObj) => {
         return instructorObj.id === id;
-    })
+    });
 
-   return result? result: null;
+    return result ? result : null;
     //instructors.find((instructorObj)=>instructorObj.id === id
-    
 }
 
 // console.log(findInstructorById(instructors, 40))
 
 //4. Find course by Id-> given array of courses and an id, find the course object that matches the given id
 function findCourseById(courses, id) {
-    let result = courses.find((courseObj)=>{
+    let result = courses.find((courseObj) => {
         return courseObj.id === id;
-    })
+    });
 
-   return result? result: null;
+    return result ? result : null;
     //courses.find((courseObj)=>courseObj.id === id
 }
 
@@ -44,20 +41,22 @@ function findCourseById(courses, id) {
 
 //5. Find student by Id-> given array of students and an id, find the student object that matches the given id
 function findstudentById(students, id) {
-    let result = students.find((studentObj)=>{
+    let result = students.find((studentObj) => {
         return studentObj.id === id;
-    })
+    });
 
-   return result? result: null;
+    return result ? result : null;
     //students.find((studentObj)=>studentObj.id === id
 }
 
 //6. Given a list of students, return back the list of students sorted by their first name
 function sortStudentsByFirstName(students) {
-    students.sort((stuA, stuB)=>{
+    students.sort((stuA, stuB) => {
         //a-b way for alphabetize
-        return stuA.name.first.toLowerCase() < stuB.name.first.toLowerCase()? -1 : 1
-    })
+        return stuA.name.first.toLowerCase() < stuB.name.first.toLowerCase()
+            ? -1
+            : 1;
+    });
 
     return students;
 }
@@ -73,37 +72,34 @@ find the courses that have all students on pace and find courses that have at le
 */
 
 function partitionCoursesByStudentProgress(courses) {
-   //go through the courses array, and filter for the courses where the courseObj.roster has at least one student who is not on pace
-    let notOnPaceCourses = courses.filter((courseObj)=>{
+    //go through the courses array, and filter for the courses where the courseObj.roster has at least one student who is not on pace
+    let notOnPaceCourses = courses.filter((courseObj) => {
         let roster = courseObj.roster;
 
         //are any of the students in the roster for this courseObj not on pace?
-        let isNotOnPace = roster.some(currStudent=>{
-
-            //.some() has to return true or false. 
-            return currStudent.onPace === false
-        })
+        let isNotOnPace = roster.some((currStudent) => {
+            //.some() has to return true or false.
+            return currStudent.onPace === false;
+        });
         //if we return true, the current element(courseObj) will be part of the result array
         //if we reutrn false, the current element(courseObj) will not make it through the filter and will not be in our result
-        return isNotOnPace //isNotOnPace will be true if at least one student is not on pace, and it will return false if everybody is on pace
-    })
+        return isNotOnPace; //isNotOnPace will be true if at least one student is not on pace, and it will return false if everybody is on pace
+    });
 
-    let onPaceCourses = courses.filter((courseObj)=>{
+    let onPaceCourses = courses.filter((courseObj) => {
         let roster = courseObj.roster;
 
         //are every student in the roster for this courseObj on pace?
-        let isOnPace = roster.every(currStudent=>{
-
-            //.every() has to return true or false. 
-            return currStudent.onPace === true
-        })
+        let isOnPace = roster.every((currStudent) => {
+            //.every() has to return true or false.
+            return currStudent.onPace === true;
+        });
         //if we return true, the current element(courseObj) will be part of the result array
         //if we reutrn false, the current element(courseObj) will not make it through the filter and will not be in our result
-        return isOnPace //isOnPace will be true if at least one student is not on pace, and it will return false if everybody is on pace
-    })
+        return isOnPace; //isOnPace will be true if at least one student is not on pace, and it will return false if everybody is on pace
+    });
 
-    return [onPaceCourses, notOnPaceCourses]
-
+    return [onPaceCourses, notOnPaceCourses];
 }
 
 // console.log(partitionCoursesByStudentProgress(courses))
@@ -144,20 +140,21 @@ let oneCourse = {
 
 function getStudentsForCourse(course, students) {
     // let roster = course.roster
-    let {roster} = course; //destructuring roster array from the course object
+    let { roster } = course; //destructuring roster array from the course object
     //For each element in the roster array, i want a new array with the related student object
 
-    let result = roster.map((rosterStudent)=>{
-        //current roster students id
-        let foundStudentObj = students.find((studentObj)=>{
+    let result = roster.map((rosterStudent) => {
+        //current roster students id. see if we can find in the students array, a student objects whose id === the rosterStudent.studentId
+        let foundStudentObj = students.find((studentObj) => {
             return studentObj.id === rosterStudent.studentId;
-        })
-    
-       return foundStudentObj
+        });
+        //add a property for the onPace information to the found student object
+        foundStudentObj.onPace = rosterStudent.onPace;
+        return foundStudentObj;
         //dont forget to return cuz u got curly braces!
-    })
+    });
 
-    return result;
+    return result.splice(0,2)
 }
 
 let oneCourse = {
@@ -189,7 +186,7 @@ let oneCourse = {
     ],
 };
 
-console.log(getStudentsForCourse(oneCourse, students))
+// console.log(getStudentsForCourse(oneCourse, students));
 
 /* 
 9. getTotalNumberOfClassesForStudent- Given a student object and an array of course objects, find the number of times this student object's id appears in the all the courses rosters array
@@ -203,8 +200,47 @@ let student1 = {
     }
 */
 
-function getTotalNumberOfClassesEnrolledIn(student, courses) {
-    
+function getTotalNumberOfClassesEnrolledIn(student={}, courses=[]) {
+    //given students id in a variable
+    const {id} = student
+    /* 
+    //without reduce
+    let total = 0;
+    // loop through the courses array
+    courses.forEach((courseObj)=>{
+        //check the courseObj.roster array for any object in that roster whose .studentId === given student id (id)
+        let isStudentInCourse = courseObj.roster.some((rosterObj)=>{
+            //check if any rosterObj.studentId === given id (id)
+            return rosterObj.studentId === id;
+        })
+
+        //if you use filter you will do this
+        // if(isStudentInCourse.length>0){
+        //     total++
+        // }
+
+        //if you use .some you will do this
+        // if(isStudentInCourse===true){
+        //     total++
+        // }
+    })
+    */
+
+    //with reduce
+    let total = courses.reduce((total,courseObj)=>{
+        let isStudentInCourse = courseObj.roster.some((rosterObj)=>{
+            //check if any rosterObj.studentId === given id (id)
+            return rosterObj.studentId === id;
+        })
+        if(isStudentInCourse) {
+            total ++
+        }
+
+        //reduce function has to return something to add to the total
+        return total
+    },0)
+
+    return total
 }
 
 let student1 = {
@@ -224,9 +260,7 @@ let student1 = {
 
 */
 
-function getCoursesStudentEnrolledIn(student, courses, instructors) {
-    
-}
+function getCoursesStudentEnrolledIn(student, courses, instructors) {}
 
 // console.log(getCoursesStudentEnrolledIn(student1, courses, instructors));
 
@@ -234,9 +268,7 @@ function getCoursesStudentEnrolledIn(student, courses, instructors) {
 11. Get count of courses who have at least on student not onPace- similar to getBooksBorrowedCount(books)
 */
 
-function getCoursesNotOnPaceCount(courses) {
-    
-}
+function getCoursesNotOnPaceCount(courses) {}
 
 // console.log(getCoursesNotOnPaceCount(courses));
 
@@ -251,9 +283,7 @@ function getCoursesNotOnPaceCount(courses) {
 
 */
 
-const getMostCommonCategories = (courses) => {
-    
-};
+const getMostCommonCategories = (courses) => {};
 
 // console.log(getMostCommonCategories(courses));
 
@@ -269,9 +299,7 @@ Output in this format:
 ]
 */
 
-function getMostPopularCourses(courses) {
-   
-}
+function getMostPopularCourses(courses) {}
 
 // console.log(getMostPopularCourses(courses));
 
@@ -288,13 +316,8 @@ Output in this format:
 
 */
 
-function instructorsOfLargestClasses(courses, instructors) {
-    
-}
+function instructorsOfLargestClasses(courses, instructors) {}
 
-function helperJoinFirstAndLastNames(first, last) {
-   
-}
+function helperJoinFirstAndLastNames(first, last) {}
 
 // console.log(getMostBusyInstructors(courses, instructors));
-

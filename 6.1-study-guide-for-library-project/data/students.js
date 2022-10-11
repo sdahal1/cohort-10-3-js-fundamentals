@@ -4,7 +4,7 @@ const students = [
         name: {
             first: "Bugs",
             last: "Bunny"
-        },
+        }
     },
     {
         id: 2,
