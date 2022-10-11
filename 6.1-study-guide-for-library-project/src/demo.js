@@ -260,7 +260,35 @@ let student1 = {
 
 */
 
-function getCoursesStudentEnrolledIn(student, courses, instructors) {}
+function getCoursesStudentEnrolledIn(student, courses, instructors) {
+    //extract the given student id and rename it to givenStudentId
+    const {id:givenStudentId} = student;
+    
+    //filter loop through courses and give back the course objects whose roster contains the givenStudentId
+    let coursesStudentTakes = courses.filter((courseObj)=>{
+        //if the courseObj.roster has a rosterObj whose .studentId === givenStudentId. if it does, add it to our coffe cup (return the courseObj). otherwise dont return the courseObj
+        let courseHasStudent = courseObj.roster.some(rosterObj=>{
+            return rosterObj.studentId === givenStudentId
+        })
+        if(courseHasStudent === true){
+            //modify the course object to have a property called instructor, and the vlaue being the instructor object matches
+
+            //find the instructor id
+            const {instructorId} = courseObj
+            //find an instructor who has that id from the courseObj.instructorId
+            let foundInstructorObj = instructors.find((instructorObj) => {
+                return instructorObj.id === instructorId;
+            });
+            
+            //add the foundInstructorObj to the courseObj
+            courseObj.instructor = foundInstructorObj;
+            return courseObj
+        }
+    })
+    return coursesStudentTakes;
+
+
+}
 
 // console.log(getCoursesStudentEnrolledIn(student1, courses, instructors));
 
@@ -268,7 +296,9 @@ function getCoursesStudentEnrolledIn(student, courses, instructors) {}
 11. Get count of courses who have at least on student not onPace- similar to getBooksBorrowedCount(books)
 */
 
-function getCoursesNotOnPaceCount(courses) {}
+function getCoursesNotOnPaceCount(courses) {
+    
+}
 
 // console.log(getCoursesNotOnPaceCount(courses));
 
