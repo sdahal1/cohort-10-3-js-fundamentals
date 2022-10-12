@@ -154,7 +154,7 @@ function getStudentsForCourse(course, students) {
         //dont forget to return cuz u got curly braces!
     });
 
-    return result.splice(0,2)
+    return result.splice(0, 2);
 }
 
 let oneCourse = {
@@ -200,9 +200,9 @@ let student1 = {
     }
 */
 
-function getTotalNumberOfClassesEnrolledIn(student={}, courses=[]) {
+function getTotalNumberOfClassesEnrolledIn(student = {}, courses = []) {
     //given students id in a variable
-    const {id} = student
+    const { id } = student;
     /* 
     //without reduce
     let total = 0;
@@ -226,21 +226,22 @@ function getTotalNumberOfClassesEnrolledIn(student={}, courses=[]) {
     })
     */
 
-    //with reduce
-    let total = courses.reduce((total,courseObj)=>{
-        let isStudentInCourse = courseObj.roster.some((rosterObj)=>{
+    //with reduce i loop through the courses array and for each course object I will do the following
+    let total = courses.reduce((total, courseObj) => {
+        //use .some to check if the courr's roster hablah
+        let isStudentInCourse = courseObj.roster.some((rosterObj) => {
             //check if any rosterObj.studentId === given id (id)
             return rosterObj.studentId === id;
-        })
-        if(isStudentInCourse) {
-            total ++
+        });
+        if (isStudentInCourse) {
+            total++;
         }
 
         //reduce function has to return something to add to the total
-        return total
-    },0)
+        return total;
+    }, 0);
 
-    return total
+    return total;
 }
 
 let student1 = {
@@ -262,42 +263,81 @@ let student1 = {
 
 function getCoursesStudentEnrolledIn(student, courses, instructors) {
     //extract the given student id and rename it to givenStudentId
-    const {id:givenStudentId} = student;
-    
+    const { id: givenStudentId } = student;
+
     //filter loop through courses and give back the course objects whose roster contains the givenStudentId
-    let coursesStudentTakes = courses.filter((courseObj)=>{
+    let coursesStudentTakes = courses.filter((courseObj) => {
         //if the courseObj.roster has a rosterObj whose .studentId === givenStudentId. if it does, add it to our coffe cup (return the courseObj). otherwise dont return the courseObj
-        let courseHasStudent = courseObj.roster.some(rosterObj=>{
-            return rosterObj.studentId === givenStudentId
-        })
-        if(courseHasStudent === true){
+        let courseHasStudent = courseObj.roster.some((rosterObj) => {
+            return rosterObj.studentId === givenStudentId;
+        });
+        if (courseHasStudent === true) {
             //modify the course object to have a property called instructor, and the vlaue being the instructor object matches
 
             //find the instructor id
-            const {instructorId} = courseObj
+            const { instructorId } = courseObj;
             //find an instructor who has that id from the courseObj.instructorId
             let foundInstructorObj = instructors.find((instructorObj) => {
                 return instructorObj.id === instructorId;
             });
-            
+
             //add the foundInstructorObj to the courseObj
             courseObj.instructor = foundInstructorObj;
-            return courseObj
+            return courseObj;
         }
-    })
+    });
     return coursesStudentTakes;
-
-
 }
 
 // console.log(getCoursesStudentEnrolledIn(student1, courses, instructors));
 
 /*
-11. Get count of courses who have at least on student not onPace- similar to getBooksBorrowedCount(books)
+11. Get count of courses that have at least one student not onPace- similar to getBooksBorrowedCount(books)
 */
 
-function getCoursesNotOnPaceCount(courses) {
+function getCoursesNotOnPaceCount(courses = []) {
+    /* 
+    //the for each way
+
+         //have a variable to store the total count
+         let total = 0;
+         //for every course in the courses array, we want to look at each course.roster array to see if that particular course's roster has at least one student who is behind. If they do, add it to our total count
+         courses.forEach((courseObj)=>{
+             let isAnybodyBehind = courseObj.roster.some((rosterObj)=>{
+                 return rosterObj.onPace === false
+             })
+
+             if(isAnybodyBehind) total++;
+         })
+         return total
     
+    
+    
+    */
+
+    /* 
+    //another way to do it using the partition function already written
+        let result = partitionCoursesByStudentProgress(courses)
+        console.log('********************************************************')
+        console.log(result[1].length);
+        console.log('********************************************************')
+    
+    */
+
+    /* 
+    //another way with reduce
+    */
+    let result = courses.reduce((total, courseObj) => {
+        let isAnybodyBehind = courseObj.roster.some((rosterObj) => {
+            return rosterObj.onPace === false;
+        });
+
+        if (isAnybodyBehind) total++;
+
+        return total;
+    }, 0);
+
+    return result;
 }
 
 // console.log(getCoursesNotOnPaceCount(courses));
@@ -311,9 +351,42 @@ function getCoursesNotOnPaceCount(courses) {
     { name: "Psychology", count: 2 },
 ]
 
+{
+ "Software Engineering": 3,
+ "Psychology": 2,
+ "finance": 2
+}
+
+
 */
 
-const getMostCommonCategories = (courses) => {};
+const getMostCommonCategories = (courses = []) => {
+    //create an empty object to put the course categories and count into
+    let categoriesObj = {};
+    courses.forEach((courseObj) => {
+        let currentCourseObjCategory = courseObj.category;
+        //check if the current courseObj's category exists as a key in our categoriesObj
+        if (currentCourseObjCategory in categoriesObj) {
+            categoriesObj[currentCourseObjCategory] += 1;
+        } else {
+            //else-> if the category is not in the categoryObj, then create a key in the categoriesObj
+            categoriesObj[currentCourseObjCategory] = 1;
+        }
+    });
+
+    //get the keys form the categories object and put it in an array
+    let categoriesArray = Object.keys(categoriesObj);
+    // console.log(categoriesArray);
+
+    //for each category in the categories array, create an object with a name and count property
+    let result = categoriesArray.map((category) => {
+        //category represnents a category name like "software engineering"
+        //categoriesObj[category] gives us the count from our categoriesObj
+        return { name: category, count: categoriesObj[category] };
+    });
+
+    return result;
+};
 
 // console.log(getMostCommonCategories(courses));
 
@@ -329,13 +402,30 @@ Output in this format:
 ]
 */
 
-function getMostPopularCourses(courses) {}
+function getMostPopularCoursesHelper(courses = []) {
+    //sort the courses array by the courseObj's roster size (courseObj.roster.length)
+    courses.sort((courseA, courseB) => {
+        return courseB.roster.length - courseA.roster.length;
+    });
+    return courses
+}
+
+function getMostPopularCourses(courses = []) {
+    courses = getMostPopularCoursesHelper(courses)
+
+    //.slice will give me the first 3 course objects from the sorted courses array, then we will map through those three course objects and create an array with objects that look like this: { name: 'Python Fundamentals', rosterSize: 3 } in it
+    let result = courses.slice(0, 3).map((courseObj) => {
+        return { name: courseObj.name, rosterSize: courseObj.roster.length };
+    });
+
+    return result;
+}
 
 // console.log(getMostPopularCourses(courses));
 
 /* 
 
-14. Get instructors of largest classes.
+14. Get instructors of the 2 largest classes.
 
 Output in this format: 
 
@@ -346,8 +436,40 @@ Output in this format:
 
 */
 
-function instructorsOfLargestClasses(courses, instructors) {}
+function instructorsOfLargestClasses(courses=[], instructors=[]) {
+    let mostPopularCourses = getMostPopularCoursesHelper(courses);
 
-function helperJoinFirstAndLastNames(first, last) {}
+    let topTwoCourses = mostPopularCourses.slice(0,2);
+    
+    let result = topTwoCourses.map((courseObj)=>{
+        //num students
+        let numStudents = courseObj.roster.length;
 
-// console.log(getMostBusyInstructors(courses, instructors));
+        //id of instructor
+        let {instructorId} = courseObj;
+
+        let foundInstructor = instructors.find((instructorObj)=>{
+            return instructorObj.id === instructorId;
+        })
+
+        // let fullName = foundInstructor.name.first + " " + foundInstructor.name.last
+        // let fullName = `${foundInstructor.name.first} ${foundInstructor.name.last}`
+
+        //using the helper function to get the full name
+        let fullName = helperJoinFirstAndLastNames(foundInstructor.name.first, foundInstructor.name.last)
+
+        // return {name:fullName, numStudents: numStudents}
+
+        //object shorthand
+        return {name: fullName, numStudents}
+    })
+
+    return result;
+
+}
+
+function helperJoinFirstAndLastNames(first, last) {
+    return `${first} ${last}`
+}
+
+console.log(instructorsOfLargestClasses(courses, instructors));
