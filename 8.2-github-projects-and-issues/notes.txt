@@ -1,0 +1,13 @@
+-Organize projects using Kanban Board -> a board that has several phases to categorize your projects with (To Do, In Progress, Done)
+
+-Issues: 
+    1. Chores (Mundane tasks like refactoring some code, updating some versionso on some packages)
+    2. Bugs
+    3. Feature Requests
+
+
+You can share links to your cards with other developers/collaborators
+
+You can automate the movement of those cards based on other peoples actions
+
+
