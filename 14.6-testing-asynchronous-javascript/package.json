@@ -1,0 +1,23 @@
+{
+  "name": "zid-wr-making-requests-05-testing-asynchronous-javascript",
+  "version": "1.0.0",
+  "description": "zid-wr-making-requests-05-testing-asynchronous-javascript qualified challenge.",
+  "scripts": {
+    "docker:build": "docker image build . -t thinkful-ed/zid-wr-making-requests-05-testing-asynchronous-javascript",
+    "docker:run": "docker run --rm -it -p 3000:3000 thinkful-ed/zid-wr-making-requests-05-testing-asynchronous-javascript",
+    "docker:stop": "docker stop $(docker ps -q)",
+    "docker:test": "docker run -i thinkful-ed/zid-wr-making-requests-05-testing-asynchronous-javascript npm test",
+    "start:solution": "npm run -it docker:build && npm run docker:run",
+    "test": "jest",
+    "test:solution": "npm run docker:build && npm run docker:test"
+  },
+  "keywords": [],
+  "author": "Thinkful.com",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}

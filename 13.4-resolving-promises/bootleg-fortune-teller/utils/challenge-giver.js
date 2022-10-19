@@ -13,8 +13,9 @@ function startGame() {
 
     // let gamePromise = new Promise((resolve, reject)=>{
     //     resolve(message)
-    // })
-    return Promise.resolve(message);
+    // }) 
+    // return gamePromise;
+    return Promise.resolve(message)
 }
 
 function endGame() {
@@ -23,12 +24,16 @@ function endGame() {
 }
 
 function giveChallenge(challenge) {
+    // console.log("giving challenge function")
     if (!challenge) {
         const message = "C'mon now, where is the challenge at?";
+        // return new Promise((resolve, reject)=>{
+        //     reject(message)
+        // })
         return Promise.reject(message);
     }
 
-    const student = selectRandomStudent();
+    const student = selectRandomStudent(); //generates a random student and puts it in the variable "student"
     return Promise.resolve(`${student} will have to do this: ${challenge}`);
 }
 
