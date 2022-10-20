@@ -9,7 +9,7 @@
     },
     {
       "id": "2",
-      "name": "Chef Curry",
+      "name": "Steph Curry",
       "team": "Warriors",
       "number_championships": 4,
       "state": "California"
@@ -30,7 +30,7 @@
     },
     {
       "id": "5",
-      "name": "Kobe 'Black Mamba' ",
+      "name": "Kobe",
       "team": "Lakers",
       "number_championships": 5,
       "state": "California"
@@ -50,11 +50,109 @@
       "state": "Illinois"
     },
     {
-      "name": "Klay",
-      "team": "Warriors",
-      "number_championships": 4,
+      "id": "8",
+      "name": "Kyrie Irving",
+      "team": "Nets",
+      "number_championships": 1,
+      "state": "New York"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
       "state": "California",
-      "id": "5csOWIF"
+      "id": "SP_bMsp"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "O1VN6mx"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "rDQnneF"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "nTOXQVK"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "3AJKcJY"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "_VaOTi_"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "OIQQjPn"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "WVqDD6Q"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "jzBeFRh"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "H9DyK1A"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "Z6934oA"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "nXse78_"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "tV0lEaH"
+    },
+    {
+      "name": "Magic Johnson",
+      "team": "Lakers",
+      "number_championships": 5,
+      "state": "California",
+      "id": "kVJNCNG"
     }
   ]
 }

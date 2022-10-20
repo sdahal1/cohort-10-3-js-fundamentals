@@ -1,4 +1,4 @@
-const axios = require("../utils/axios");
+const axios = require("../utils/axios"); //used to make api calls/requests (get, post, put, patch, delete)
 const BASE_URL = "http://localhost:5000";
 
 function index() {
@@ -12,16 +12,23 @@ function index() {
     })
     .catch(({ message }) => {
       console.error(message);
+      
     });
 }
 
+
+
 function createPlayer(body) {
   return axios
-    .post(`${BASE_URL}/players`, body)
+    .post(`${BASE_URL}/players`, body) //axios.post(urlForApiGoesHere, dataYouWantToAdd_GoesHere)
     .then(({ data }) => data)
+    // .then((response) => response.data) //same as line 24
     .catch(({ message }) => {
       console.error(message);
     });
+    // .catch((error) => { //another way to write line 26-28
+    //   console.error(error.message);
+    // });
 }
 
 function showOnePlayer(id) {

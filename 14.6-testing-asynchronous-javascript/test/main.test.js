@@ -4,8 +4,8 @@ const { index, createPlayer, showOnePlayer } = require("../src/main");
 const BASE_URL = "http://localhost:5000";
 
 describe("src/main.js", () => {
-  describe("index()", () => {
-
+  describe("index()", () => { //describe is to indicate which function we are testing
+    //our test data set
     const playersList =[
       {
         id: "1",
@@ -65,25 +65,26 @@ describe("src/main.js", () => {
       }
     ]
 
-    beforeEach(() => {
-      jest.spyOn(axios, 'get');
+    beforeEach(() => { 
+      jest.spyOn(axios, 'get');  //creates a jest mock function for axios.get()
     });
     
     afterEach(() => {
-      jest.clearAllMocks();
+      jest.clearAllMocks(); //clear the mock test after the implementation. It doesnt need to spy on axios.get after we finish testing
     });
 
-    it("should make a GET request to the appropriate URL", async () => {
-      // await index();
-      // const expectedURL = `${BASE_URL}/players`;
-      // expect(axios.get).toHaveBeenCalledWith(expectedURL);
-      expect(1).toEqual(2);
+    it("should make a GET request to the appropriate URL", async () => { //any it() is a  test case for a function
+      await index(); //calling on the index() function
+
+      const expectedURL = `${BASE_URL}/players`; //indicating which url is the right url for the index() function's axios.get() call to call
+      expect(axios.get).toHaveBeenCalledWith(expectedURL); //check if the axios.get() was called like this axios.get(`${BASE_URL}/players`)
+
     });
 
     it("should return a list of all players with more than 4 championships", async () => {
-      // axios.get.mockImplementation(() => Promise.resolve({ data: playersList })); //i want the function to resolve this data
+      axios.get.mockImplementation(() => Promise.resolve({ data: playersList })); //i want the function to resolve this data
 
-      // const response = await index();
+      const response = await index();
       
       const expected = [
         {
@@ -101,22 +102,23 @@ describe("src/main.js", () => {
           state: "Illinois"
         }
       ]
-      // expect(response).toEqual(expected);
+      expect(response).toEqual(expected);
     });
     
     it("should log an error to the console", async () => {
-      // axios.get.mockImplementation(() =>
-      //   Promise.reject(new Error("GET request failed."))
-      // );
-      // jest.spyOn(console, "error");
+      axios.get.mockImplementation(() =>
+        Promise.reject(new Error("GET request failed."))
+      );
+      jest.spyOn(console, "error"); //spy on any console.error() calls 
 
-      // await index();
+      await index();
 
-      // expect(console.error).toHaveBeenCalledWith("GET request failed.");
+      expect(console.error).toHaveBeenCalledWith("GET request failed.");
     });
   });
   
-  describe("createPlayer()", () => {
+  describe("createPlayer()", () => { //describe-> represents the function im testing
+    //body represents the data we want to add (or post)
     const body =  {
       name: "Magic Johnson",
       team: "Lakers",
@@ -125,7 +127,7 @@ describe("src/main.js", () => {
     }
     
     // You can use this player data in your tests
-    const newlyCreatedPlayer = { ...body, id: "9" };
+    const newlyCreatedPlayer = { ...body, id: "9" }; //newLyCreatedPlayer will look like body, but it will also have an id of 9
 
     beforeEach(() => {
       jest.spyOn(axios, 'post');
@@ -136,26 +138,39 @@ describe("src/main.js", () => {
     });
 
     it("should make a POST request to the appropriate URL with a valid data body", async () => {
-      // await createPlayer(body);
-      // const expectedURL = `${BASE_URL}/players`;
-      // expect(axios.post).toHaveBeenCalledWith(expectedURL, body);
+      //how should the post request look like
+      await createPlayer(body);
+
+      //what url should axios.post be calledd with?
+      let expectedURL = `${BASE_URL}/players`;
+
+      expect(axios.post).toHaveBeenCalledWith(expectedURL, body);
+
     });
 
     it("should resolve with a promise containing the newly saved player", async () => {
-      // axios.post.mockImplementation(() => Promise.resolve({ data:newlyCreatedPlayer }));
+      axios.post.mockImplementation(()=>{
+        return Promise.resolve({data: newlyCreatedPlayer})
+      })
 
-      // const response = await createPlayer(body);
-      
-      // const expected = newlyCreatedPlayer
-      // expect(response).toEqual(expected);
+      //test the createPlayer() function and store the return value
+      const response = await createPlayer(body);
+
+      expect(response).toEqual(newlyCreatedPlayer);
+
     });
     
     it("should log an error to the console", async () => {
-      // axios.post.mockImplementation(() => Promise.reject(new Error("Post request failed homie")));
+      axios.post.mockImplementation(()=>{
+        return Promise.reject(new Error("Post request failed fam."))
+      })
+
+      await createPlayer(body)
+      jest.spyOn(console, "error") //spy on console.error()
+
+      expect(console.error).toHaveBeenCalledWith("Post request failed fam.")
       
-      // const response = await createPlayer();
-      // jest.spyOn(console, "error");
-      // expect(console.error).toHaveBeenCalledWith("Post request failed homie")
+
     });
   });
   
@@ -179,29 +194,44 @@ describe("src/main.js", () => {
     });
 
     it("should make a GET request to the appropriate URL", async () => {
-      // await showOnePlayer(id);
-      // const expectedURL = `${BASE_URL}/players/${id}`;
-      // expect(axios.get).toHaveBeenCalledWith(expectedURL);
+      
+      await showOnePlayer(id);
+
+      //what url should axios.get be calledd with?
+      let expectedURL = `${BASE_URL}/players/${id}`;
+
+      expect(axios.get).toHaveBeenCalledWith(expectedURL);
+      
+
     });
 
     it("should resolve with a promise containing the player data", async () => {
       // Write your solution here
-      // axios.get.mockImplementation(() => Promise.resolve({ data:player }));
 
-      // const response = await showOnePlayer(id);
-      
-      // const expected = player
-      // expect(response).toEqual(expected);
+     
+      axios.get.mockImplementation(()=>{
+        return Promise.resolve({data:player})
+      })
+
+      //test the showOnePlayer() function is returning the data
+      const response = await showOnePlayer(id);
+
+      expect(response).toEqual(player);
+
     });
      
     it("should log an error to the console", async () => {
       // Write your solution here
-      // axios.get.mockImplementation(() => Promise.reject(new Error("Couldn't find the homie")));
-
-      // jest.spyOn(console, "error");
-      // await showOnePlayer();
+      axios.get.mockImplementation(()=>{
+        return Promise.reject(new Error("Get request failed fam."))
+      })
       
-      // expect(console.error).toHaveBeenCalledWith("Couldn't find the homie");
+      //keep track of console.error statements
+      jest.spyOn(console, "error");
+      await showOnePlayer(id)
+
+      expect(console.error).toHaveBeenCalledWith("Get request failed fam.");
+
     });
   }); 
 });  
