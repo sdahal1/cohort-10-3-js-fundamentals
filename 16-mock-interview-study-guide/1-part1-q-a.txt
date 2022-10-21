@@ -12,6 +12,7 @@
 2. Technical questions
 
 -What is Node?
+    -Allows you to run javascript on your local machine.
 
 
 -What is github vs git?
@@ -35,10 +36,11 @@
 
 
 -What is a server?
+    -A server is a program that will accept requests and give back a resposne to the client that requests it
 
 
 -What is the request-response cycle?
-
+    -
 
 -What is a navigator and driver in group work?
 
