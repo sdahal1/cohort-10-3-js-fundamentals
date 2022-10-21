@@ -8,32 +8,32 @@
       "state": "California"
     },
     {
-      "name": "King James",
-      "team": "Cleveland",
+      "id": "2",
+      "name": "LBJ",
+      "team": "Lakers",
       "number_championships": 5,
-      "state": "Ohio",
-      "id": "2"
+      "state": "Los Angeles"
     },
     {
+      "id": "3",
       "name": "The Answer",
       "team": "Sixers",
       "number_championships": 0,
-      "state": "Pennsylvania",
-      "id": "3"
+      "state": "Pennsylvania"
     },
     {
       "id": "4",
-      "name": "Luka Doncic",
-      "team": "Mavericks",
+      "name": "Luka The Don",
+      "team": "Mavs",
       "number_championships": 0,
       "state": "Dallas"
     },
     {
       "id": "5",
       "name": "Kobe",
-      "team": "Lakers",
-      "number_championships": 5,
-      "state": "California"
+      "team": "Knicks",
+      "number_championships": 10,
+      "state": "New York"
     },
     {
       "id": "6",
