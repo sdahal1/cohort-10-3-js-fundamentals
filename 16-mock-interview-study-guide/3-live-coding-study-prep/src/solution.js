@@ -94,7 +94,7 @@ function getCoinMarketData(coinName) {
         .get(`https://api.coingecko.com/api/v3/coins/${coinName}`)
         .then(({ data }) => {
             // console.log(data.market_data)
-            return data;
+            return data.market_data;
         })
         .catch((error) => {
             return "Coins not found!";
