@@ -144,21 +144,24 @@ const getCoinsInfo = (coins=[]) => {
 
 
 
-function listCoinsInfoFromCoinGecko() {
-    return axios
-        .get(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-        )
-        .then((response) => {
-            return response.data; //response.data is our array of coins
-        })
-        // .then(getCoinsInfo)
-        .then((arrayOfCoinObjects)=>{
-            return getCoinsInfo(arrayOfCoinObjects)
-        })
-        .then((coinData) => {
-            return coinData;
-        });
+async function listCoinsInfoFromCoinGecko() {
+    let response = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+    let arrayOfCoinObjects = await getCoinsInfo(response.data)
+    let coinData = getCoinInfo(arrayOfCoinObjects);
+//     return axios
+//         .get(
+//             "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+//         )
+//         .then((response) => {
+//             return response.data; //response.data is our array of coins
+//         })
+//         // .then(getCoinsInfo)
+//         .then((arrayOfCoinObjects)=>{
+//             return getCoinInfo(arrayOfCoinObjects)
+//         })
+//         .then((coinData) => {
+//             return coinData;
+//         });
 }
 
 listCoinsInfoFromCoinGecko()
