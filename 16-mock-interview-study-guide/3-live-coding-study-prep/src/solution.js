@@ -79,7 +79,7 @@ getCoinMarketData('bitcoin') /* ->
       "bits": 1000030,
       "link": 2819,
       "sats": 100002999
-}
+}, ...other keys related to market data
 
 
 
@@ -88,31 +88,157 @@ getCoinMarketData('bitcoin') /* ->
 //what do i need to import to make api calls?
 const axios = require("axios");
 
-//how should i write this function-> does it need a parameter? if so, what would be a good name?
-function getCoinMarketData(coinName) {
-    return axios
-        .get(`https://api.coingecko.com/api/v3/coins/${coinName}`)
-        .then(({ data }) => {
-            // console.log(data.market_data)
-            return data.market_data;
-        })
-        .catch((error) => {
-            return "Coins not found!";
-        });
 
-    //show undefined error-> how to fix that? -> returns!
-    //show data not being formatted correctly error, how to fix that? where can we look to see what the response should look like so we know what part of response to return back? -> response.data
+/* 
+1. read the instructions on qualified!!!
+2. find out what to name the function based on instructions
+3. figure out if the function is accepting any parameters
+4. find the api endpoint in the instructions!! and test it (using Postman)!!
+5. find what part of the response we are asked to return-> its in the instructions
+6. if there is a parameter, find out how to structure your api endpoint. If there are no parameters, then you might just use the api endpoint provided without any modification. 
+7. set up the endpoint in a variable inside the function, adjusted for if there is a parameter related to that endpoint
+8. Make a api call using axios and the endpoint, extract the response.data using the .then .catch syntax or try/catch with async await
+9. from the response.data, ask yourself-> is this what they are asking for in the instructions? (see step 5)
+10. see if you can console.log the expected output first
+11. return the axios call and return the response in the .then that you console.logged (if you're using the .then .catch syntax)---> if your using async await syntax, return the variable, not the axios call
+*/
+
+//how should i write this function-> does it need a parameter? if so, what would be a good name?
+function getCoinMarketData2(coinName) {
+    let endpoint = `https://api.coingecko.com/api/v3/coins/${coinName}`
+
+    return axios.get(endpoint)
+        .then((response)=>{
+            // console.log(response.data.market_data)
+            return response.data.market_data
+        })
+        .catch((err)=>{
+            // console.log(`Coin not found, here is the error message: ${err.message}`)
+            return err.message
+        })
+
+    
+    
 }
 
-async function getCoinMarketData(coinName) {
-    try {
-        let response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${coinName}`
-        );
-        return response.data.market_data;
-    } catch (error) {
-        return "Coins not found!";
+
+async function getCoinMarketData(coinName){
+    try{
+        let endpoint = `https://api.coingecko.com/api/v3/coins/${coinName}`
+    
+        let response = await axios.get(endpoint)
+        // console.log(response.data.market_data)
+        return response.data.market_data
+
+    }
+    catch(err){
+        console.log(`Coin not found, here is the error message: ${err.message}`)
+        return err.message
     }
 }
+
+// getCoinMarketData("robcoin")
+// console.log("wazzzaaaaaaaaap")
+
+
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* 
+
+make a function called getFormattedCoinData that accepts a coin name as a parameter
+
+What if you had to give back this response for the api endpoint
+{
+    coinName: "Bitcoin",
+    genesis_date: "2009-01-03",
+    usd_price: 20681,
+    ath_usd: 69045
+}
+
+
+*/
+
+
+
+function getFormattedCoinData(coinName){
+    let endpoint = `https://api.coingecko.com/api/v3/coins/${coinName}`
+
+    return axios.get(endpoint)
+        .then((response)=>{
+            console.log(response.data)
+            let coinName = response.data.name;
+            let genesis_date = response.data.genesis_date;
+            let usd_price = response.data.market_data.current_price.usd;
+            let ath_usd = response.data.market_data.ath.usd
+
+            let result = {
+                coinName,
+                genesis_date,
+                usd_price,
+                ath_usd
+            }
+
+            // console.log(result)
+            return result
+        })
+        .catch(err=>{
+            console.log(err.message)
+        })
+}
+
+async function getFormattedCoinData2(coin){
+    try{
+        let endpoint = `https://api.coingecko.com/api/v3/coins/${coin}`
+    
+        let response = await axios.get(endpoint)
+        let coinName = response.data.name;
+        let genesis_date = response.data.genesis_date;
+        let usd_price = response.data.market_data.current_price.usd;
+        let ath_usd = response.data.market_data.ath.usd
+    
+        let result = {
+            coinName,
+            genesis_date,
+            usd_price,
+            ath_usd
+        }
+        // console.log(result)
+        return result
+    }
+    catch(err){
+        console.log(err.message)
+    }
+
+
+
+        // .then((response)=>{
+        //     console.log(response.data)
+        //     let coinName = response.data.name;
+        //     let genesis_date = response.data.genesis_date;
+        //     let usd_price = response.data.market_data.current_price.usd;
+        //     let ath_usd = response.data.market_data.ath.usd
+
+        //     let result = {
+        //         coinName,
+        //         genesis_date,
+        //         usd_price,
+        //         ath_usd
+        //     }
+
+        //     // console.log(result)
+        //     return result
+        // })
+        // .catch(err=>{
+        //     console.log(err.message)
+        // })
+}
+
+
+
+
+getFormattedCoinData2("badcoin")
 
 module.exports = { getCoinMarketData };

@@ -11,7 +11,7 @@ const axios = require("axios"); //what is this? what is it used for? -> allows u
 //Example 1- a function that is given an array of objects and another array of arrays. Return back an array of objects containing some data from the two inputs
 //what are parameters? -> placeholder variables for the inputs the function expects to receive
 //setting default parameters? Why are they useful? -> so you can help to avoid edge cases, tell the function what data type to expect to prevent errors, 
-function getTeamGamesData(teams=[], games=[]) {
+function getTeamGamesData(teams, games) {
 
     let teamWinsLosses = [];
     
