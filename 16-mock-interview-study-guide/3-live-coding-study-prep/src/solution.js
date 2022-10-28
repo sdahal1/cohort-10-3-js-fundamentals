@@ -238,7 +238,51 @@ async function getFormattedCoinData2(coin){
 
 
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-getFormattedCoinData2("badcoin")
+/* 
+
+make a function called getAllCoins that takes no parameters.
+You can use this endpoint: https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false
+
+
+What if you had to give back this response for the api endpoint
+[
+  {
+    "name": "Bitcoin",
+    "current_price": 20575,
+    "price_change_percentage_24h": -0.29773
+  },
+  {...},
+  {...}
+]
+
+
+*/
+
+function getAllCoins(){
+    let endpoint = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+
+    return axios.get(endpoint)
+        .then(response=>{
+            //response.data is an array of objects
+            // console.log(response.data)
+
+            let result = response.data.map(coinObj=>{
+                return {
+                    name: coinObj.name,
+                    current_price: coinObj.current_price,
+                    price_change_percentage_24h: coinObj.price_change_percentage_24h
+                }
+            })
+            console.log(result)
+            return result;
+        })
+
+}
+
+getAllCoins()
+
+// getFormattedCoinData2("badcoin")
 
 module.exports = { getCoinMarketData };

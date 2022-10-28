@@ -105,7 +105,7 @@ let games = [
 //   j=0
 ];
 
-console.log(getTeamGamesData(teams, games))
+// console.log(getTeamGamesData(teams, games))
 
 
 
@@ -113,24 +113,59 @@ let baseurl = "https://api.coingecko.com/api/v3/coins";
 
 
 //what does this async keyword mean?
+
 const getCoinInfo = async (coinObj) => {
     //what does await do? what is another way to "wait" for an api call to finish, or to wait for asynchronous code to complete and resolve?
+    //we are making an api call to an api endpoint-> this is a get request using axios, so we will be retieving information about a coin using the coinObj's id
+    //the await just means wait for the response to come back before executing the next line of code. this is an alternative to .then() syntax
     const coinResponse = await axios.get(`${baseurl}/${coinObj.id.toLowerCase()}`);
+    // can refactor the ^^^^ above line ^^^ is ---> const {data} = await axios.get(`${baseurl}/${coinObj.id.toLowerCase()}`);
+
+
+
+    //form the reponse we get back, return back an object that has some information from the api response.
+    
     return {
         name: coinObj.name,
         price: coinResponse.data.market_data.current_price.usd, ////why do we have .data here? what would it look like without the .data?
         links: coinResponse.data.links //returning what part of the response we get back from api?
     }
-    //what code would you write in cases where the axios call does not work? Where maybe something goes wrong?
+    //what code would you write in cases where the axios call does not work? Where maybe something goes wrong?-> try/catch
     //what syntax would you use if you use the async await vs .then ways?
+    /* 
+    .then way
+
+    return axios.get(`${baseurl}/${coinObj.id.toLowerCase()}`)
+        .then((coinResponse)=>{
+            return {
+                name: coinObj.name,
+                price: coinResponse.data.market_data.current_price.usd, ////why do we have .data here? what would it look like without the .data?
+                links: coinResponse.data.links //returning what part of the response we get back from api?
+            }
+        })
+        .catch((err)=>{
+            console.log(err.message)
+        })
+    
+    */
 };
 
 
-const getCoinsInfo = (coins) => {
+// console.log(getCoinInfo({id:"bitcoin", name: "Bitcoin" }))
 
-    let topFiveCoins = coins.slice(0,5)
-    //what is another way to write this code below?
-    return Promise.all(topFiveCoins.map(getCoinInfo)).then((response) => {
+
+const getMultipleCoinsInfo = (coins) => {
+
+    //from the given array of coins, create a new array that only contains coins from index 0-2
+    let topThreeCoins = coins.slice(0,3) 
+    //what is promise.all-> promise.all takes an array of promises, and it resolves all the promises at once
+
+    //what does .map do? -> it creates a new array with an item for each item in the original array that we mapped through
+
+    //in this case, topThreeCoins.map(getCoinInfo) means-> for every coin object in topThreeCoins array, run the getCoinInfo function and return that result into an array. So we will have an array containing the result of the getCoinInfo function for each coin from topThreeCoins-> array of pending promsies---> [ Promise { <pending> }, Promise { <pending> }, Promise { <pending> } ]
+
+    console.log(topThreeCoins.map(getCoinInfo));
+    return Promise.all(topThreeCoins.map(getCoinInfo)).then((response) => {
         //response looks like the 
         console.log("got response in .all", response); //what does response look like here? and why does it look like this?
         return response; //what happens if we don't return the response here?
@@ -140,18 +175,48 @@ const getCoinsInfo = (coins) => {
     })
 };
 
+// getMultipleCoinsInfo([
+//     {id:"bitcoin", name: "Bitcoin" },
+//     {id:"ethereum", name: "Ethereum" },
+//     {id:"solana", name: "Solana" },
+//     {id:"tether", name: "Tether" }
+// ])
+
 
 function listCoinsInfoFromCoinGecko(){
+    // axios
+    //     .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+    //     .then(response=> {
+    //         return response.data
+    //     })
+    //     .then(getMultipleCoinsInfo)
+    //     .then((coinData)=>{
+    //         return coinData
+    //     })
+
     axios
         .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
         .then(response=> {
             return response.data
         })
-        .then(getCoinsInfo)
+        .then((data)=>{
+            return getMultipleCoinsInfo(data)
+        })
         .then((coinData)=>{
             return coinData
         })
 }
+
+
+async function listCoinsInfoFromCoinGecko2(){
+    let response = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+
+    let {data} = response;
+
+    let coinData = await getMultipleCoinsInfo(data);
+    return coinData;
+}
+
 
 // listCoinsInfoFromCoinGecko()
 
