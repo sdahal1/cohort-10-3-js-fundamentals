@@ -1,0 +1,33 @@
+body{
+    background-color: rgb(74, 68, 68);
+}
+
+.row{
+    display: flex;
+    gap: 10px;
+    border: 3px solid red;
+    padding: 10px;
+    margin-bottom: 100px;
+    flex-wrap: wrap;
+}
+
+.up-down{
+    /* flex-direction: column-reverse; */
+}
+
+
+/* target the divs inside each div with the class named row */
+
+
+.row div{
+    border: 2px solid white;
+    flex: 1;
+}
+
+.row .col-2{
+    flex: 2;
+}
+
+img{
+    width: 100%;
+}
