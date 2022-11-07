@@ -1,0 +1,70 @@
+main {
+  width: 280px;
+  margin: auto;
+  padding: 20px;
+}
+
+.group {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  border: 1px solid black;
+  /* height: 300px; */
+}
+
+.three{
+  height: 10px;
+}
+
+.flex-start {
+  align-items: stretch;
+}
+
+.flex-start li {
+  background: tomato;
+}
+
+.flex-end {
+  align-items: flex-end;
+}
+
+.flex-end li {
+  background: gold;
+}
+
+.center {
+  align-items: center;
+}
+
+.center li {
+  background: deepskyblue;
+}
+
+.baseline {
+  align-items: baseline;
+}
+
+.baseline li {
+  background: lightgreen;
+}
+
+.stretch {
+  align-items: stretch;
+}
+
+.stretch li {
+  background: hotpink;
+}
+
+.item {
+  padding: 5px;
+  width: 50px;
+  margin: 5px;
+
+  line-height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}

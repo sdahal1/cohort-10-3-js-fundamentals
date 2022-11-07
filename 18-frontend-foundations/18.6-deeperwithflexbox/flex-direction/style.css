@@ -1,0 +1,47 @@
+main h1 {
+  margin: 0 10px;
+  border-bottom: 1px solid gray;
+}
+
+main h2 {
+  margin: 12px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.group img {
+  width: 100%;
+}
+
+/* Groups & Items  (Mobile First) */
+.wrapper {
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  margin-bottom: 60px;
+  gap: 30px;
+}
+
+.row {
+  flex-direction: row;
+}
+.col {
+  flex-direction: column;
+}
+.row-rev {
+  flex-direction: row-reverse;
+}
+.col-rev {
+  flex-direction: column-reverse;
+}
+
+.item {
+  flex: 1;
+  /* margin-right: 30px; */
+}
+
+.item-double {
+  flex: 2;
+  margin: 10px;
+}

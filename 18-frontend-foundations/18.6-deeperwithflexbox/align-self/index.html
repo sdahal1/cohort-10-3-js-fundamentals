@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Flexbox: Align-Self</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <main>
+      <div class="note">
+        <p>
+          Each item can be uniquely aligned compared to the others. These are
+          the more useful:
+        </p>
+        <ul>
+          <li>The Cloud is set to flex-start.</li>
+          <li>The Heart is set to flex-end.</li>
+          <li>And the Car is set to center.</li>
+        </ul>
+      </div>
+
+      <div class="wrapper">
+        <div class="group">
+          <div class="item">
+            <h2>Align-Self</h2>
+            <div class="badges-list badge-flex-start">
+              <div class="badge self-flex-start">
+                <i class="fas fa-cloud"></i>
+              </div>
+              <div class="badge self-flex-end">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="badge self-center">
+                <i class="fas fa-car"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

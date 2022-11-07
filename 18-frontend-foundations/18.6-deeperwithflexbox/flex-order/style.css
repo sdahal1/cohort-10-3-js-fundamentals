@@ -1,0 +1,64 @@
+main h1 {
+  margin: 0 10px;
+  border-bottom: 1px solid gray;
+}
+
+main h2 {
+  margin: 12px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.group img {
+  width: 100%;
+}
+
+/* Groups & Items  (Mobile First) */
+.wrapper {
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.item {
+  flex: 1;
+  margin: 10px;
+}
+
+.item1 {
+  order: 1;
+}
+
+.item2 {
+  order: 2;
+}
+
+.item3 {
+  order: 3;
+}
+
+.item4 {
+  order: 4;
+}
+
+/* Item Order  (Desktop) */
+
+@media all and (min-width: 600px) {
+  .item1 {
+    order: 2;
+  }
+
+  .item2 {
+    order: 4;
+  }
+
+  .item3 {
+    order: 3;
+  }
+
+  .item4 {
+    order: 1;
+  }
+}

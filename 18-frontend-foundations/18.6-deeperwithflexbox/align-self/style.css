@@ -1,0 +1,75 @@
+main h1 {
+  margin: 0 10px;
+  border-bottom: 1px solid gray;
+}
+
+main h2 {
+  margin: 12px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+/* Groups & Items  (Mobile First) */
+.wrapper {
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  height: 450px;
+}
+
+.item {
+  flex: 1;
+  margin: 10px;
+}
+
+.item-double {
+  flex: 2;
+  margin: 10px;
+}
+
+/* Badges using inline-flex */
+.badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  height: 350px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("images/oval.svg");
+  height: 80px;
+  width: 80px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.self-flex-start {
+  align-self: flex-start;
+}
+
+.self-flex-end {
+  align-self: flex-end;
+}
+
+.self-center {
+  align-self: center;
+}
+
+/* Font-Awesome Icon */
+.badge i {
+  color: #fff;
+  font-size: 40px;
+}
+
+.note {
+  width: 80%;
+  margin: 50px auto;
+}

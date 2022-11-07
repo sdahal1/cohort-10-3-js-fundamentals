@@ -1,0 +1,35 @@
+.row{
+    display: flex;
+    flex-direction: row;
+    background-color: gray;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    height: 200px;
+}
+
+.item{
+    border: 1px solid black;
+    background-color: aqua;
+    padding: 20px;
+}
+
+.one{
+    /* order: 5; */
+    flex: 1;
+}
+.two{
+    /* order: 2; */
+    flex: 1;
+}
+.three{
+    /* order: 4; */
+    /* flex: 2; */
+    align-self: flex-end;
+}
+.four{
+    /* order: 1; */
+    /* flex: 5; */
+}
+
+/* 9 slices of pizza (available space) */
