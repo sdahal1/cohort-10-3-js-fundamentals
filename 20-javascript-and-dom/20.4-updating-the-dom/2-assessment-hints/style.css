@@ -1,0 +1,45 @@
+.container{
+    padding: 20px;
+    border: 1px solid black;
+}
+
+
+.puppies{
+    border: 1px solid red;
+    padding: 20px;
+    background-color:darksalmon;
+}
+
+.kittens{
+    border: 1px solid red;
+    padding: 20px;
+    background-color:cadetblue;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.puppy{
+    border: 1px solid black;
+    padding: 30px;
+    background-color:antiquewhite;
+}
+
+.kitten{
+    border: 1px solid black;
+    padding: 30px;
+    background-color: rgb(164, 130, 88);
+}
+
+.puppy h2, .kitten h2{
+    text-align: center;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
