@@ -39,7 +39,9 @@
 }
 
 img{
-    width: 200px;
+    width: 50%;
     height: 200px;
     border-radius: 50%;
+    display: block;
+    margin: auto;
 }
